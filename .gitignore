@@ -1,4 +1,4 @@
 __pycache__/
 .vscode/
-dataverse_files/
+dataverse_files/*.csv
 model_cache/
