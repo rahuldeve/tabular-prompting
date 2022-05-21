@@ -29,7 +29,7 @@ def generate_value_prompts(
     value_prompts = df.select(
         [
             pl.all().exclude("counts"),
-            (np.floor(pl.col("counts") / 10) * 10)  # type: ignore
+            (np.floor(pl.col("counts") / 100) * 100)  # type: ignore
             .cast(pl.Int64)
             .apply(lambda x: str(x)),
         ]
