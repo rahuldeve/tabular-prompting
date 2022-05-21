@@ -1,5 +1,4 @@
 from glob import glob
-from typing import List, Sequence, cast
 import polars as pl
 
 
@@ -16,29 +15,8 @@ def load_data(start_year: int, end_year: int) -> pl.DataFrame:
         pl.count().alias("counts")
     ).collect()
 
-    # months_df = pl.DataFrame(
-    #     {
-    #         "Month": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-    #         "Month_name": [
-    #             "January",
-    #             "February",
-    #             "March",
-    #             "April",
-    #             "May",
-    #             "June",
-    #             "July",
-    #             "August",
-    #             "September",
-    #             "October",
-    #             "November",
-    #             "December",
-    #         ],
-    #     }
-    # )
-
     airports_df = pl.read_csv("dataverse_files/airports.csv")
     airports_df = airports_df.select([pl.col("iata"), pl.col("airport")])
 
     df = df.join(airports_df, left_on="Origin", right_on="iata")
-    # df = df.join(months_df, on="Month")
     return df
