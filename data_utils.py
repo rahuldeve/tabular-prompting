@@ -9,7 +9,7 @@ def load_data(start_year: int, end_year: int) -> pl.DataFrame:
 
     df: pl.DataFrame = df.select(
         ["Year", "Month", "DayofMonth", "DayOfWeek", "Origin"]
-    ).filter((pl.col("Year") > start_year) & (pl.col('Year') < end_year)).groupby(
+    ).filter((pl.col("Year") >= start_year) & (pl.col('Year') <= end_year)).groupby(
         ["Year", "Month", "DayofMonth", "DayOfWeek", "Origin"]
     ).agg(
         pl.count().alias("counts")
